@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-dark text-secondary px-4 py-5 text-center">
+  <div class="py-5">
+    <p>{{article.author}} / {{article.publication_date}}</p>
+    <h1 class="display-5 fw-bold text-white">{{article.name}}</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="fs-5 mb-4">{{article.content}}</p>      
+      {% if user.is_authenticated %}
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <a href="{% url "comment" article.id %}"><button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Add comment</button></a>
+      </div>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        {% if in_bookmarks %}
+        <a href="{% url "add_bookmarks" article.id %}"><button type="button" class="btn btn-outline-danger btn-lg px-4 me-sm-3 fw-bold">Delete</button></a>
+        {% else %}
+        <a href="{% url "add_bookmarks" article.id %}"><button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Save</button></a>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  <hr>
+  {% for comment in article.comments.all reversed %}
+      <p>{{comment.user}} / {{comment.time}}</p>
+      <p>{{comment.content}}</p>
+      <hr>
+    {% endfor %}
+</div>
+{% endblock content %}
