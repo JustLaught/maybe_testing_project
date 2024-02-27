@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container px-4 py-5" id="hanging-icons">
+    <h2 class="pb-2 border-bottom">Articles</h2>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Filters
+      </button>
+      <ul id="Sort-Links" class="dropdown-menu dropdown-menu-dark">
+        <li><a class="dropdown-item active" href="?sort=views">Views</a></li>
+        <li><a class="dropdown-item" href="?sort=bookmarks">Bookmarks</a></li>
+        <li><a class="dropdown-item" href="?sort=comments">Comments</a></li>
+      </ul>
+    </div>
+      {% for a in articles %}
+        <div class="col d-flex align-items-start mb-5">
+            <div>
+            <h3 class="fs-2 text-body-emphasis">{{a.name}}</h3>
+            <p>{{a.content|slice:':105'}}...</p>
+            <p>Views: {{a.views}}; In bookmarks: {{a.bookmarks.count}}; Comments: {{a.comments.count}}</p>
+            <a href="{% url "article" a.id %}" class="btn btn-primary">View</a>
+            </div>
+        </div> 
+      {% endfor %}  
+</div>
+{% endblock content %}

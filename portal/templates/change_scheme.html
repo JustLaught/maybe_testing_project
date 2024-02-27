@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form method="get">
+        <div class="col-sm-6 mx-auto">         
+            <label for="BodyColor">BackGround Color:</label>
+            <input type="color" name="BodyColor" id="BodyColor">                    
+            <label for="TextColor">Text Color:</label>
+            <input type="color" name="TextColor" id="TextColor">                                 
+            <label for="FontSizeNum">Front-Size:</label>
+            <input type="number" min="10" max="30" name="FontSizeNum" id='FontSizeNum'>px |
+            <input type="submit" value="Apply"><br>
+            <a href="{% url "reset_change_scheme" %}"><button type="button" class="btn btn-outline-light me-2">RESET</button></a>             
+        </div>    
+    </form>
+{% endblock content %}

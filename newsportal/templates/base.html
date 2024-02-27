@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NewsPortal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
+    <link rel="stylesheet" href="{% static "styles/styles.css" %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+  </head>
 <body>
     <header class="p-3 text-bg-dark">
         <div class="container">
@@ -19,9 +21,11 @@
               <li><a href="{% url "index" %}" class="nav-link px-2 text-blue">Home</a></li>
               {% if user.is_authenticated %}
               <li><a href="{% url "bookmarks" %}" class="nav-link px-2 text-white">Bookmarks</a></li>
-              {% comment %} <li><a href="#" class="nav-link px-2 text-white">None2</a></li>
-              <li><a href="#" class="nav-link px-2 text-white">None3</a></li>
-              <li><a href="#" class="nav-link px-2 text-white">None4</a></li> {% endcomment %}
+                {% if user.is_superuser %}
+                <li><a href="{% url "change_scheme" %}" class="nav-link px-2 text-white">Change Scheme</a></li>
+                <li><a href="{% url "ratings" %}" class="nav-link px-2 text-white">Ratings</a></li>
+                {% endif %}
+              {% comment %} <li><a href="#" class="nav-link px-2 text-white">None4</a></li> {% endcomment %}
               {% endif %}
             </ul>
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method='get'>
@@ -53,7 +57,7 @@
           <span class="mb-3 mb-md-0 text-body-secondary">© 2023 DeadInsideCompany, HxH.Inc</span>
         </div>
     
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <ul class="nav col-md-4 justify-content-center list-unstyled d-flex">
           <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg>Twiter</a></li>
           <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg>Insta</a></li>
           <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg>FaceBook</a></li>
