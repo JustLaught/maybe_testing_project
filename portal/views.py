@@ -8,6 +8,9 @@ from django.contrib.auth import authenticate, login, logout
 def index(request):
     sort_field = request.GET.get('sort')
     search_field = request.GET.get('search')
+    if search_field == 'null':
+        search_field = None
+        
     if search_field and sort_field:
         articles_by_name = Article.objects.filter(name__icontains=search_field)[:10]
         article_by_text = Article.objects.filter(content__icontains=search_field)[:10]
@@ -60,6 +63,8 @@ def register(request):
 
 def article(request, id):
     article = Article.objects.get(id=id)
+    article.views += 1
+    article.save()
     in_bookmarks = False
     try:
         for marks in request.user.bookmarks.all():
@@ -101,6 +106,43 @@ def comment(request, id):
             return redirect('index')
         else: return render(request, 'comment.html')
     else: return redirect('article', id)
+
+def change_scheme(request):
+    if request.user.is_authenticated and request.user.is_superuser:
+        if request.method == 'GET':
+            BodyColor = request.GET.get("BodyColor")
+            TextColor = request.GET.get("TextColor")
+            FontSizeNum = request.GET.get("FontSizeNum")
+            if FontSizeNum != '' and BodyColor != '' and TextColor != '':
+                with open('newsportal/static/styles/styles.css', 'w+') as f:
+                    f.write('body{' + f'background-color: {BodyColor}; color: {TextColor}; font-size: {FontSizeNum}px;' + '}')
+            elif BodyColor != '' and TextColor != '': 
+                with open('newsportal/static/styles/styles.css', 'w+') as f:
+                    f.write('body{' + f'background-color: {BodyColor}; color: {TextColor};' + '}')
+                return redirect('index')       
+        return render(request, 'change_scheme.html')
+    else:
+        return redirect('index')
+
+def reset_change_scheme(request):
+    if request.user.is_authenticated and request.user.is_superuser:
+        with open('newsportal/static/styles/styles.css', 'r+') as f:
+            f.read()
+        with open('newsportal/static/styles/styles.css', 'w+') as f:
+            f.write('')
+        return redirect('index')
+    return redirect('index')
+
+def ratings(request):
+    if request.user.is_authenticated and request.user.is_superuser:  
+        sort_filter = request.GET.get('sort')
+        if sort_filter:
+            articles = Article.objects.order_by(sort_filter).all()
+            return render(request, 'article_rating.html', {'articles': articles})
+        else:
+            articles = Article.objects.all()
+            return render(request, 'article_rating.html', {'articles': articles})
+    return redirect('index')
 
 def logout_user(request):
     logout(request)

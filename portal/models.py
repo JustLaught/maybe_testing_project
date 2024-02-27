@@ -8,6 +8,8 @@ class Article(models.Model):
     publication_date = models.DateTimeField('PublicationDate', auto_now=False, auto_now_add=False)
     tags = models.CharField('Tags', max_length=400)
     content = models.TextField('Text')
+    views = models.IntegerField('Views', default=0)
+
     class Meta:
         ordering = ['publication_date', 'author', 'tags']
 
@@ -38,5 +40,4 @@ class Bookmark(models.Model):
     user = models.ForeignKey(User, related_name='bookmarks', on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return f'{self.user} / {self.article}'
-    
+        return f'{self.user} / {self.article}'    
