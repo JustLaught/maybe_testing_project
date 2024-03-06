@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
 
-# Create your views here.
+#* Create your views here.
 def index(request):
     sort_field = request.GET.get('sort')
     search_field = request.GET.get('search')
@@ -31,6 +31,7 @@ def index(request):
 
 def login_user(request):
     if request.method == 'POST':
+        # todo: Add hash to paswords 
         name = request.POST['user_name']
         password = request.POST['Password']
         user = authenticate(username=name, password=password)
@@ -44,8 +45,9 @@ def login_user(request):
 
 def register(request):
     if request.method == 'POST':
-        # name = request.POST['first_name']
-        # lastname = request.POST['last_name']
+        #// name = request.POST['first_name']
+        #// lastname = request.POST['last_name']
+        # todo: Add hash to paswords 
         password = request.POST['password']
         password2 = request.POST['repeatPassword']
         if password != password2:
