@@ -10,6 +10,12 @@
     pkgs.python311
     pkgs.python311Packages.pip
     pkgs.python311Packages.django
+    pkgs.python311Packages.asgiref
+    pkgs.python311Packages.gunicorn
+    pkgs.python311Packages.packaging
+    pkgs.python311Packages.sqlparse
+    pkgs.python311Packages.tzdata
+    pkgs.python311Packages.whitenoise
     # pkgs.nodePackages.nodemon
   ];
 
