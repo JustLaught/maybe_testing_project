@@ -15,7 +15,7 @@
     pkgs.python311Packages.packaging
     pkgs.python311Packages.sqlparse
     pkgs.python311Packages.tzdata
-    pkgs.python311Packages.whitenoise
+    # pkgs.python311Packages.whitenoise
     # pkgs.nodePackages.nodemon
   ];
 
@@ -64,6 +64,9 @@
       onCreate = {
         # Example: install JS dependencies from NPM
         # npm-install = 'npm install';
+        # python-venv = "python -m venv venv";
+        # venv-actv = "source venv/bin/activate";
+        # requirements-libs = "pip install -r requirements.txt";
       };
       onStart = {
         # Example: start a background task to watch and re-build backend code
