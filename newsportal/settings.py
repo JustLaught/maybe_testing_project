@@ -22,12 +22,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 #! SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = os.getenv('TEST_SECRET_KEY')
+# SECRET_KEY = os.getenv('TEST_SECRET_KEY')
+SECRET_KEY = 'e5jJdCbc93rwZ2fRkKz5tLvrMaOYoLdM'
 
 #! SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://8000-monospace-maybe-testing-project-1714684258520.cluster-blu4edcrfnajktuztkjzgyxzek.cloudworkstations.dev']
+CSRF_TRUSTED_ORIGINS = ['https://8000-monospace-maybe-testing-project-1714684258520.cluster-blu4edcrfnajktuztkjzgyxzek.cloudworkstations.dev']
 
 
 #* Application definition
