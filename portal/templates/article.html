@@ -11,7 +11,7 @@
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
         <a href="{% url "comment" article.id %}"><button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Add comment</button></a>
       </div>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <div class="d-grid gap-2 d-sm-flex mt-2 justify-content-sm-center">
         {% if in_bookmarks %}
         <a href="{% url "add_bookmarks" article.id %}"><button type="button" class="btn btn-outline-danger btn-lg px-4 me-sm-3 fw-bold">Delete</button></a>
         {% else %}
